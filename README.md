@@ -3,7 +3,7 @@
 
 ## Link of the previous project
 
-* This repository is forked from our [previous project](https://github.com/fahad1985lab/Smart--Contracts--Verification--With--Agda)
+* This repository is extended from our [previous project](https://github.com/fahad1985lab/Smart--Contracts--Verification--With--Agda)
 
 ## Code in Agda
 * All Agda Code
