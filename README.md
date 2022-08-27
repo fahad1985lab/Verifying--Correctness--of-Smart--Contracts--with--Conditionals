@@ -10,7 +10,7 @@
   [ScriptTester](/ScriptTester/)
 
 * The main contribution on this file
-  [verificationWithIfStack](/ScriptTester/verificationBitcoinScripts/)
+  [verificationBitcoinScripts](/ScriptTester/verificationBitcoinScripts/)
   
 * The file  [guidelines.agda](ScriptTesterguidelines.agda/) shows the code in the order as it appears in the paper.
 
