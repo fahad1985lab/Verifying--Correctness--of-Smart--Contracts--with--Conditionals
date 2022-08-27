@@ -10,9 +10,9 @@
   [ScriptTester](/ScriptTester/)
 
 * The main contribution on this file
-  [verificationWithIfStack](/ScriptTester/verificationWithIfStack/)
+  [verificationWithIfStack](/ScriptTester/verificationBitcoinScripts/)
   
-* The file  [guidelines.agda](ScriptTester/verificationWithIfStack/guidelines.agda/) shows the code in the order as it appears in the paper.
+* The file  [guidelines.agda](ScriptTesterguidelines.agda/) shows the code in the order as it appears in the paper.
 
 ## Html Version
 * Html version of Agda code (no Agda installation needed) In order to render it in your browser you need to download it first and then load the downloaded file html/loadAll.html into your browser. Location of files: [html](/html/loadAll.html)
