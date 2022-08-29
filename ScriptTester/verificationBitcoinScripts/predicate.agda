@@ -18,11 +18,8 @@ open Eq using (_≡_; refl; cong; module ≡-Reasoning; sym)
 open ≡-Reasoning
 open import Agda.Builtin.Equality
 
-open import libraries.listLib
-open import libraries.natLib
-open import libraries.boolLib
 open import libraries.andLib
-open import libraries.maybeLib
+
 
 open import basicBitcoinDataType
 open import stack

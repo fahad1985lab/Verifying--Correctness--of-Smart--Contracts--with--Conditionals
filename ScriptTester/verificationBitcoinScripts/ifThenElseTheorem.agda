@@ -23,7 +23,6 @@ open import Agda.Builtin.Equality
 
 
 open import libraries.andLib
---open import libraries.miscLib
 open import libraries.maybeLib
 
 open import stack

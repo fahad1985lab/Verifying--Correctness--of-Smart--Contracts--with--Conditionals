@@ -10,11 +10,7 @@ open import Data.Product renaming (_,_ to _,,_ )
 open import Data.Nat.Base hiding (_≤_)
 open import Data.List.NonEmpty hiding (head)
 
-open import libraries.listLib
-open import libraries.natLib
 open import libraries.boolLib
-open import libraries.andLib
-open import libraries.maybeLib
 
 open import basicBitcoinDataType
 

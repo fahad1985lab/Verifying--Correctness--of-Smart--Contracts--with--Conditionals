@@ -19,7 +19,7 @@ open import Agda.Builtin.Equality
 open import libraries.listLib
 open import libraries.natLib
 open import libraries.boolLib
-open import libraries.andLib
+--open import libraries.andLib
 open import libraries.maybeLib
 
 
@@ -32,10 +32,10 @@ StackPredicate = Time → Msg → Stack → Set
 
 _⊎sp_   : (φ ψ : StackPredicate) → StackPredicate
 (φ  ⊎sp  ψ)  t m st = φ  t m st  ⊎ ψ  t m st
-
+{-
 _∧sp_ : ( φ ψ  : StackPredicate ) → StackPredicate
 (φ ∧sp ψ ) t m s   =  φ t m s  ∧  ψ t m s
-
+-}
 
 truePredaux : StackPredicate → StackPredicate
 truePredaux φ time msg [] = ⊥
