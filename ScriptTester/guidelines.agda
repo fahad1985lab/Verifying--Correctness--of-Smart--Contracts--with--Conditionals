@@ -13,7 +13,7 @@ module guidelines (param : GlobalParameters) where
 
 
 
--- Sect III Introduction to Agda
+-- Sect III Introduction to the Proof Assistant to Agda
 
 open import instruction
 open import ledger param
@@ -21,7 +21,7 @@ open import ledger param
 
 -- Sect IV Operational Semantics for Bitcoin Script
 
--- Subsect A. An overview on Bitcoin Script
+-- Subsect A. Bitcoin Script - the language of Bitcoin for Smart Contracts
 
 -- Subsect B. Operational Semantics
 
