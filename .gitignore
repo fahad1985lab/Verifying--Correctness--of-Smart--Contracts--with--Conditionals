@@ -1,2 +1,7 @@
 *.agdai
 MAlonzo/**
+# ignore emacs backup files
+*~
+\#*
+.\#*
+
