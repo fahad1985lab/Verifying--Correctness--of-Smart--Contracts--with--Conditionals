@@ -36,7 +36,6 @@ open import verificationBitcoinScripts.hoareTriple param
 
 -- Sect VI Verification Condition for Conditionals
 
-open import verificationBitcoinScripts.ifThenElseTheorem param
 open import verificationBitcoinScripts.predicate
 open import verificationBitcoinScripts.ifStack
 

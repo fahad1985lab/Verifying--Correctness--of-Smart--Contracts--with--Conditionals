@@ -37,7 +37,6 @@ open import stackPredicate
 
 open import verificationBitcoinScripts.hoareTriple param
 open import verificationBitcoinScripts.ifStack
-open import verificationBitcoinScripts.ifThenElseTheorem param
 open import verificationBitcoinScripts.predicate
 open import verificationBitcoinScripts.semanticsInstructions param
 open import verificationBitcoinScripts.state
