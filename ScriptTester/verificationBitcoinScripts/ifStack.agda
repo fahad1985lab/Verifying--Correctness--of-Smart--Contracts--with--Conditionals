@@ -62,17 +62,7 @@ isNonActiveIfStack s =  not (isActiveIfStack s)
 IsNonActiveIfStack : IfStack → Set
 IsNonActiveIfStack s = True (isNonActiveIfStack s)
 
-{-
---from addition1 
-ifStackElIsNonIfIgnore : IfStackEl → Bool
-ifStackElIsNonIfIgnore ifIgnore = false
-ifStackElIsNonIfIgnore s  = true
 
-
---from addition1
-IfStackIsNonIfIgnore : IfStackEl → Set
-IfStackIsNonIfIgnore s = True (ifStackElIsNonIfIgnore s)
--}
 --from addition1
 ifStackElIsIfSkipOrElseSkip : IfStackEl → Bool
 ifStackElIsIfSkipOrElseSkip ifSkip = true
@@ -81,26 +71,6 @@ ifStackElIsIfSkipOrElseSkip s = false
 --from addition1
 IfStackElIsIfSkipOrElseSkip : IfStackEl → Set
 IfStackElIsIfSkipOrElseSkip s = True (ifStackElIsIfSkipOrElseSkip s)
-
-
--- predicate expressing that an ifStackElement is one of
---   ifSkip, ifIgnore
--- these are the skip cases which could happen if coming from the left
--- after having passed ⊥h the opEndIf and opElse
--- after having passed an opEndIf coming from the right
---           we know the top element of the ifStack is any element
--- after having then passed an opElse coming from the right
---           we know the top element of the ifStack can only be
--- as a do element   a          ifCase
--- as a skip element one of     ifSkip, ifIgnore
-ifStackElementIsIfSkipOrIfIgnore : IfStackEl → Set
-ifStackElementIsIfSkipOrIfIgnore ifSkip   = ⊤
-ifStackElementIsIfSkipOrIfIgnore ifIgnore = ⊤
-ifStackElementIsIfSkipOrIfIgnore ifCase   = ⊥
-ifStackElementIsIfSkipOrIfIgnore elseCase = ⊥
-ifStackElementIsIfSkipOrIfIgnore elseSkip = ⊥
-
-
 
 
 ifStackConsis : IfStack → Bool
@@ -117,28 +87,6 @@ IfStackConsis s = True (ifStackConsis s)
 
 
 
-ifStackElementIsElseSkipOrIfIgnore : IfStackEl → Set
-ifStackElementIsElseSkipOrIfIgnore ifIgnore = ⊤
-ifStackElementIsElseSkipOrIfIgnore elseSkip = ⊤
-ifStackElementIsElseSkipOrIfIgnore ifSkip   = ⊥
-ifStackElementIsElseSkipOrIfIgnore ifCase   = ⊥
-ifStackElementIsElseSkipOrIfIgnore elseCase = ⊥
-
-{-
-lemmaIfStackIsNonIfIgnore : (x : IfStackEl)(l : IfStack) → IfStackConsis (x ∷ l)
-                           → IsActiveIfStack l
-                           → IfStackIsNonIfIgnore x
-lemmaIfStackIsNonIfIgnore ifCase l c a = tt
-lemmaIfStackIsNonIfIgnore elseCase l c a = tt
-lemmaIfStackIsNonIfIgnore ifSkip l c a = tt
-lemmaIfStackIsNonIfIgnore elseSkip l c a = tt
-lemmaIfStackIsNonIfIgnore ifIgnore (ifCase ∷ l) () a
-lemmaIfStackIsNonIfIgnore ifIgnore (elseCase ∷ l) () a
-lemmaIfStackIsNonIfIgnore ifIgnore (ifSkip ∷ l) c ()
-lemmaIfStackIsNonIfIgnore ifIgnore (elseSkip ∷ l) c ()
-lemmaIfStackIsNonIfIgnore ifIgnore (ifIgnore ∷ l) c ()
--}
-
 
 lemmaIfStackConsisTail : (x : IfStackEl)(s : IfStack) → IfStackConsis (x ∷ s)
                          → IfStackConsis s
@@ -147,21 +95,4 @@ lemmaIfStackConsisTail elseCase s p = ∧bproj₂ p
 lemmaIfStackConsisTail ifSkip s p = ∧bproj₂ p
 lemmaIfStackConsisTail elseSkip s p = p
 lemmaIfStackConsisTail ifIgnore s p = ∧bproj₂ p
-{-
-lemmaIfStackConsisNonActiveIf : (s : IfStack) → IfStackConsis s → IsActiveIfStack s
-                                → IsActiveIfStack (ifCase ∷ s)
-lemmaIfStackConsisNonActiveIf s consis  active = tt
 
-lemmaIfStackConsisNonActiveElse : (s : IfStack) → IfStackConsis s → IsActiveIfStack s
-                                → IsActiveIfStack (elseCase ∷ s)
-lemmaIfStackConsisNonActiveElse s consis  active = tt
-
-
-lemmaIfStackElIsIfSkipOrElseSkip2IsSkip : (x : IfStackEl)
-    → True (ifStackElIsIfSkipOrElseSkip x)
-    → IsNonActiveIfStackEl x
-lemmaIfStackElIsIfSkipOrElseSkip2IsSkip ifSkip p = p
-lemmaIfStackElIsIfSkipOrElseSkip2IsSkip elseSkip p = p
-
-
--}

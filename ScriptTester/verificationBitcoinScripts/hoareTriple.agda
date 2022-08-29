@@ -55,24 +55,3 @@ record <_>ⁱᶠᶠ_<_>  (P : Predicate)(p : BitcoinScript)(Q : Predicate) : Set
 open <_>ⁱᶠᶠ_<_>  public
 
 
-record _<=>ᵖ_ (φ ψ : Predicate) : Set where
-  constructor equivp
-  field
-    ==>e  : (s : State) → φ s → ψ s
-    <==e  : (s : State) → ψ s →  φ s
-open _<=>ᵖ_ public
-
-
-refl<=>  :   (φ : Predicate)
-            →  φ <=>ᵖ φ
-refl<=> φ  .==>e s x  =  x
-refl<=> φ  .<==e s x = x
-
-
-sym<=>  :   (φ ψ : Predicate)
-            →  φ <=>ᵖ ψ
-            →  ψ <=>ᵖ φ
-sym<=> φ ψ (equivp ==>e₁ <==e₁) .==>e  = <==e₁
-sym<=> φ ψ (equivp ==>e₁ <==e₁) .<==e  = ==>e₁
-
-

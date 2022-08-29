@@ -9,14 +9,13 @@ open import Data.Empty
 open import Data.Bool  hiding (_≤_ ; if_then_else_ ) renaming (_∧_ to _∧b_ ; _∨_ to _∨b_ ; T to True)
 open import Data.Product renaming (_,_ to _,,_ )
 open import Data.Nat.Base hiding (_≤_)
--- open import Data.List.NonEmpty hiding (head)
 open import Data.Maybe
 
 import Relation.Binary.PropositionalEquality as Eq
 open Eq using (_≡_; refl; cong; module ≡-Reasoning; sym)
 open ≡-Reasoning
 open import Agda.Builtin.Equality
---open import Agda.Builtin.Equality.Rewrite
+
 
 
 open import libraries.listLib
@@ -96,18 +95,9 @@ executeOpEndIfBasic ⟨ time , msg , bitcoinStack , x ∷ ifStack , c ⟩  = jus
 
 
 
-⟦_⟧s⁺ : InstructionAll → Maybe State → Maybe State
-⟦ op ⟧s⁺ t = t >>= ⟦ op ⟧s
-
-
-
 ⟦_⟧ : BitcoinScript → State → Maybe State
 ⟦ []  ⟧  = just
 ⟦ x ∷ []  ⟧  = ⟦ x ⟧s
 ⟦ x ∷ l   ⟧  s = ⟦ x ⟧s s >>= ⟦ l ⟧
-
-
-⟦_⟧⁺ : BitcoinScript → Maybe State → Maybe State
-⟦ op ⟧⁺ s = s >>= ⟦ op ⟧
 
 
