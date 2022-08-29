@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html><head><meta charset="utf-8"><title>loadAll</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><a id="1" class="Keyword">open</a> <a id="6" class="Keyword">import</a> <a id="13" href="basicBitcoinDataType.html" class="Module">basicBitcoinDataType</a>
+
+<a id="35" class="Keyword">module</a> <a id="42" href="loadAll.html" class="Module">loadAll</a> <a id="50" class="Symbol">(</a><a id="51" href="loadAll.html#51" class="Bound">param</a> <a id="57" class="Symbol">:</a> <a id="59" href="basicBitcoinDataType.html#1053" class="Record">GlobalParameters</a><a id="75" class="Symbol">)</a> <a id="77" class="Keyword">where</a>
+
+<a id="84" class="Comment">-- Loads all files by directory in alphabetic order</a>
+<a id="136" class="Comment">-- Alphabetic order is used so that we can easily check that it is complete</a>
+<a id="212" class="Comment">-- and therefore by typechecking this file we can guarantee that the complete</a>
+<a id="290" class="Comment">-- code is type correct.</a>
+
+
+<a id="317" class="Keyword">open</a> <a id="322" class="Keyword">import</a> <a id="329" href="libraries.andLib.html" class="Module">libraries.andLib</a>
+<a id="346" class="Keyword">open</a> <a id="351" class="Keyword">import</a> <a id="358" href="libraries.boolLib.html" class="Module">libraries.boolLib</a>
+<a id="376" class="Keyword">open</a> <a id="381" class="Keyword">import</a> <a id="388" href="libraries.emptyLib.html" class="Module">libraries.emptyLib</a>
+<a id="407" class="Keyword">open</a> <a id="412" class="Keyword">import</a> <a id="419" href="libraries.equalityLib.html" class="Module">libraries.equalityLib</a>
+<a id="441" class="Keyword">open</a> <a id="446" class="Keyword">import</a> <a id="453" href="libraries.listLib.html" class="Module">libraries.listLib</a>
+<a id="471" class="Keyword">open</a> <a id="476" class="Keyword">import</a> <a id="483" href="libraries.maybeLib.html" class="Module">libraries.maybeLib</a>
+<a id="502" class="Keyword">open</a> <a id="507" class="Keyword">import</a> <a id="514" href="libraries.natLib.html" class="Module">libraries.natLib</a>
+
+
+<a id="533" class="Comment">----------------------</a>
+<a id="556" class="Comment">-- Root Directory   --</a>
+<a id="579" class="Comment">----------------------</a>
+
+
+<a id="604" class="Keyword">open</a> <a id="609" class="Keyword">import</a> <a id="616" href="instruction.html" class="Module">instruction</a>
+<a id="628" class="Keyword">open</a> <a id="633" class="Keyword">import</a> <a id="640" href="instructionBasic.html" class="Module">instructionBasic</a>
+<a id="657" class="Keyword">open</a> <a id="662" class="Keyword">import</a> <a id="669" href="ledger.html" class="Module">ledger</a> <a id="676" href="loadAll.html#51" class="Bound">param</a>
+<a id="682" class="Keyword">open</a> <a id="687" class="Keyword">import</a> <a id="694" href="semanticBasicOperations.html" class="Module">semanticBasicOperations</a> <a id="718" href="loadAll.html#51" class="Bound">param</a>
+<a id="724" class="Keyword">open</a> <a id="729" class="Keyword">import</a> <a id="736" href="stack.html" class="Module">stack</a>
+<a id="742" class="Keyword">open</a> <a id="747" class="Keyword">import</a> <a id="754" href="stackPredicate.html" class="Module">stackPredicate</a>
+
+
+
+<a id="772" class="Comment">----------------------------------------</a>
+<a id="813" class="Comment">-- Directory verificationWithIfStack --</a>
+<a id="853" class="Comment">-----------------------------------------</a>
+
+<a id="896" class="Keyword">open</a> <a id="901" class="Keyword">import</a> <a id="908" href="verificationBitcoinScripts.hoareTriple.html" class="Module">verificationBitcoinScripts.hoareTriple</a> <a id="947" href="loadAll.html#51" class="Bound">param</a>
+<a id="953" class="Keyword">open</a> <a id="958" class="Keyword">import</a> <a id="965" href="verificationBitcoinScripts.ifStack.html" class="Module">verificationBitcoinScripts.ifStack</a>
+<a id="1000" class="Keyword">open</a> <a id="1005" class="Keyword">import</a> <a id="1012" href="verificationBitcoinScripts.ifThenElseTheorem.html" class="Module">verificationBitcoinScripts.ifThenElseTheorem</a> <a id="1057" href="loadAll.html#51" class="Bound">param</a>
+<a id="1063" class="Keyword">open</a> <a id="1068" class="Keyword">import</a> <a id="1075" href="verificationBitcoinScripts.predicate.html" class="Module">verificationBitcoinScripts.predicate</a>
+<a id="1112" class="Keyword">open</a> <a id="1117" class="Keyword">import</a> <a id="1124" href="verificationBitcoinScripts.semanticsInstructions.html" class="Module">verificationBitcoinScripts.semanticsInstructions</a> <a id="1173" href="loadAll.html#51" class="Bound">param</a>
+<a id="1179" class="Keyword">open</a> <a id="1184" class="Keyword">import</a> <a id="1191" href="verificationBitcoinScripts.state.html" class="Module">verificationBitcoinScripts.state</a>
+
+</pre></body></html>
