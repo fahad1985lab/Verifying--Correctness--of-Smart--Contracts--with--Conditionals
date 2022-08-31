@@ -5,7 +5,7 @@ module guidelines (param : GlobalParameters) where
 
 -- This file is guidelines for the code contained in the paper.
 -- The authors:  Fahad Alhabardi, Bogdan Lazar, and Anton Setzer
--- The title of the paper: Verifying Correctness of Smart Contracts with Conditional
+-- The title of the paper: Verifying Correctness of Smart Contracts with Conditionals
 
 
 -- Sect I introduction
