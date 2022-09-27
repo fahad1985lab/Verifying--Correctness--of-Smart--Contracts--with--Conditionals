@@ -1,4 +1,4 @@
-# Verifying Correctness of Smart Contracts with Conditional
+# Verifying Correctness of Smart Contracts with Conditionals
 
 
 ## Link of the previous project
