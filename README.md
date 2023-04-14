@@ -21,4 +21,6 @@
  * Verifying Correctness of Smart Contracts with Conditionals - by 
  Fahad F. Alhabardi, Bogdan Lazar, and [Anotn Setzer](https://www.cs.swan.ac.uk/~csetzer/).
  
+ * The paper is available at this [link](https://ieeexplore.ieee.org/abstract/document/10087054) and [doi](http://dx.doi.org/10.1109/iGETblockchain56591.2022.10087054).
+ 
  * Licensed under a [GNU General Public License v3.0](https://www.gnu.org/licenses/gpl-3.0.en.html).
