@@ -4,7 +4,7 @@ module semanticBasicOperations (param : GlobalParameters) where
 
 open import Data.Nat  hiding (_≤_)
 open import Data.List hiding (_++_)
-open import Data.Unit  hiding (_≤_)
+open import Data.Unit  
 open import Data.Empty
 open import Data.Bool  hiding (_≤_ ; if_then_else_ ) renaming (_∧_ to _∧b_ ; _∨_ to _∨b_ ; T to True)
 open import Data.Product renaming (_,_ to _,,_ )
@@ -127,13 +127,16 @@ executeStackCheckSig3Aux msg (p1 ∷ p2 ∷ p3 ∷ s1 ∷ s2 ∷ s3 ∷ s) =  st
        ((isSigned msg s1 p1 ) ∧b (isSigned msg s2 p2) ∧b (isSigned msg s3 p3))
 
 mutual
-  compareSigsMultiSigAux : (msg : Msg)(restSigs restPubKeys : List ℕ)(topSig : ℕ)(testRes : Bool) → Bool
+  compareSigsMultiSigAux : (msg : Msg)(restSigs restPubKeys : List ℕ)
+   (topSig : ℕ)(testRes : Bool) → Bool
 
-  compareSigsMultiSigAux  msg₁  restSigs  restPubKeys  topSig  false  =  compareSigsMultiSig  msg₁  (topSig ∷ restSigs)  restPubKeys
+  compareSigsMultiSigAux  msg₁  restSigs  restPubKeys  topSig  false
+   =  compareSigsMultiSig  msg₁  (topSig ∷ restSigs)  restPubKeys
     -- If the top publicKey doesn't match the topSignature
     -- we throw away the top publicKey, but still need to find a match for the
     -- top publicKey in the remaining signatures
-  compareSigsMultiSigAux  msg₁  restSigs  restPubKeys  topSig  true  =  compareSigsMultiSig  msg₁  restSigs               restPubKeys
+  compareSigsMultiSigAux  msg₁  restSigs  restPubKeys  topSig  true
+   =  compareSigsMultiSig  msg₁  restSigs               restPubKeys
     -- If the top publicKey matches the topSignature
     -- we need to find matches between the remaining public Keys and signatures
 
@@ -147,7 +150,8 @@ mutual
 
 
 
-executeMultiSig3 : (msg : Msg)(pbks : List ℕ)(numSigs : ℕ)(st : Stack)(sigs : List ℕ) → Maybe Stack
+executeMultiSig3 : (msg : Msg)(pbks : List ℕ)(numSigs : ℕ)
+ (st : Stack)(sigs : List ℕ) → Maybe Stack
 executeMultiSig3 msg₁ pbks zero [] sigs = nothing
             -- need to fetch one extra because of a bug in bitcoin definition of MultiSig
 executeMultiSig3 msg₁ pbks zero (x ∷ restStack) sigs
@@ -159,14 +163,18 @@ executeMultiSig3 msg₁ pbks zero (x ∷ restStack) sigs
      -- Note that in BitcoinScript the public Keys and signatures need to be in the same order
      --
 executeMultiSig3 msg₁ pbks (suc numSigs) [] sigs = nothing
-executeMultiSig3 msg₁ pbks (suc numSigs) (sig ∷ rest) sigs = executeMultiSig3 msg₁ pbks numSigs rest (sig ∷ sigs)
+executeMultiSig3 msg₁ pbks (suc numSigs) (sig ∷ rest) sigs
+ = executeMultiSig3 msg₁ pbks numSigs rest (sig ∷ sigs)
 
 
 
 executeMultiSig2 : (msg : Msg)(numPbks : ℕ)(st :  Stack)(pbks : List ℕ) → Maybe Stack
-executeMultiSig2  msg  _        []                pbks  =  nothing
-executeMultiSig2  msg  zero     (numSigs ∷ rest)  pbks  =  executeMultiSig3 msg pbks numSigs rest []
-executeMultiSig2  msg  (suc n)  (pbk ∷ rest)      pbks  =  executeMultiSig2 msg n rest (pbk ∷ pbks)
+executeMultiSig2  msg  _        []                pbks
+ =  nothing
+executeMultiSig2  msg  zero     (numSigs ∷ rest)  pbks
+ =  executeMultiSig3 msg pbks numSigs rest []
+executeMultiSig2  msg  (suc n)  (pbk ∷ rest)      pbks
+ =  executeMultiSig2 msg n rest (pbk ∷ pbks)
 
 
 executeMultiSig : Msg →  Stack →  Maybe Stack

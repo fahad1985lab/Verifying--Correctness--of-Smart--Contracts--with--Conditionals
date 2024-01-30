@@ -1,33 +1,37 @@
 open import basicBitcoinDataType
 
-module verificationBitcoinScripts.semanticsInstructions (param : GlobalParameters) where
+module verificationWithIfStack.semanticsInstructions (param : GlobalParameters) where
 
 open import Data.Nat  hiding (_≤_)
 open import Data.List hiding (_++_)
-open import Data.Unit  hiding (_≤_)
+open import Data.Unit  
 open import Data.Empty
 open import Data.Bool  hiding (_≤_ ; if_then_else_ ) renaming (_∧_ to _∧b_ ; _∨_ to _∨b_ ; T to True)
 open import Data.Product renaming (_,_ to _,,_ )
 open import Data.Nat.Base hiding (_≤_)
+-- open import Data.List.NonEmpty hiding (head)
 open import Data.Maybe
 
 import Relation.Binary.PropositionalEquality as Eq
 open Eq using (_≡_; refl; cong; module ≡-Reasoning; sym)
 open ≡-Reasoning
 open import Agda.Builtin.Equality
+--open import Agda.Builtin.Equality.Rewrite
 
 
+open import libraries.listLib
+open import libraries.natLib
 open import libraries.boolLib
-
+open import libraries.andLib
+--open import libraries.miscLib
+open import libraries.maybeLib
 
 open import stack
 open import instruction
 open import semanticBasicOperations param
-open import verificationBitcoinScripts.ifStack
-open import verificationBitcoinScripts.state
-open import verificationBitcoinScripts.predicate
-
-
+open import verificationWithIfStack.ifStack
+open import verificationWithIfStack.state
+open import verificationWithIfStack.predicate
 
 
 
@@ -70,24 +74,26 @@ executeOpEndIfBasic ⟨ time , msg , bitcoinStack , x ∷ ifStack , c ⟩  = jus
 
 
 ⟦_⟧s : InstructionAll → State → Maybe State
-⟦ opEqual ⟧s    = liftStackToStateTransformerDepIfStack'  executeStackEquality 
-⟦ opAdd ⟧s      = liftStackToStateTransformerDepIfStack' executeStackAdd
+⟦ opEqual ⟧s = liftStackToStateTransformerDepIfStack'  executeStackEquality
+⟦ opAdd ⟧s = liftStackToStateTransformerDepIfStack' executeStackAdd
 ⟦ (opPush x) ⟧s = liftStackToStateTransformerDepIfStack' (executeStackPush x)
-⟦ opSub ⟧s      = liftStackToStateTransformerDepIfStack' executeStackSub
-⟦ opVerify ⟧s   = liftStackToStateTransformerDepIfStack' executeStackVerify
-⟦ opCheckSig ⟧s =  liftMsgStackToStateTransformerDepIfStack' executeStackCheckSig 
+⟦ opSub ⟧s  = liftStackToStateTransformerDepIfStack' executeStackSub
+⟦ opVerify ⟧s = liftStackToStateTransformerDepIfStack' executeStackVerify
+⟦ opCheckSig ⟧s  =  liftMsgStackToStateTransformerDepIfStack' executeStackCheckSig
 ⟦ opEqualVerify ⟧s =  liftStackToStateTransformerDepIfStack'  executeStackVerify
-⟦ opDup ⟧s      = liftStackToStateTransformerDepIfStack' executeStackDup
-⟦ opDrop ⟧s     = liftStackToStateTransformerDepIfStack' executeStackDrop
-⟦ opSwap ⟧s     =  liftStackToStateTransformerDepIfStack' executeStackSwap
+⟦ opDup ⟧s = liftStackToStateTransformerDepIfStack' executeStackDup
+⟦ opDrop ⟧s = liftStackToStateTransformerDepIfStack' executeStackDrop
+⟦ opSwap ⟧s =  liftStackToStateTransformerDepIfStack' executeStackSwap
 ⟦ opCHECKLOCKTIMEVERIFY ⟧s =  liftTimeStackToStateTransformerDepIfStack' executeOpCHECKLOCKTIMEVERIFY
-⟦ opCheckSig3  ⟧s = liftMsgStackToStateTransformerDepIfStack' executeStackCheckSig3Aux 
-⟦ opHash  ⟧s    =  liftStackToStateTransformerDepIfStack' executeOpHash 
+⟦ opCheckSig3  ⟧s = liftMsgStackToStateTransformerDepIfStack' executeStackCheckSig3Aux
+⟦ opHash  ⟧s =  liftStackToStateTransformerDepIfStack' executeOpHash
 ⟦ opMultiSig ⟧s = liftMsgStackToStateTransformerDepIfStack' executeMultiSig
-⟦ opIf ⟧s       = executeOpIfBasic
-⟦ opElse ⟧s     =  executeOpElseBasic
-⟦ opEndIf ⟧s    =  executeOpEndIfBasic
+⟦ opIf ⟧s =   executeOpIfBasic
+⟦ opElse ⟧s =  executeOpElseBasic
+⟦ opEndIf ⟧s =  executeOpEndIfBasic
 
+⟦_⟧s⁺ : InstructionAll → Maybe State → Maybe State
+⟦ op ⟧s⁺ t = t >>= ⟦ op ⟧s
 
 
 
@@ -97,3 +103,13 @@ executeOpEndIfBasic ⟨ time , msg , bitcoinStack , x ∷ ifStack , c ⟩  = jus
 ⟦ x ∷ l   ⟧  s = ⟦ x ⟧s s >>= ⟦ l ⟧
 
 
+⟦_⟧⁺ : BitcoinScript → Maybe State → Maybe State
+⟦ op ⟧⁺ s = s >>= ⟦ op ⟧
+
+validStackAux : (pbkh : ℕ) →  (msg : Msg) →  Stack →  Bool
+validStackAux pkh msg[]  []  = false
+validStackAux pkh msg (pbk ∷ []) = false
+validStackAux pkh msg (pbk ∷ sig ∷ s) = hashFun pbk  ==b pkh ∧b isSigned msg sig pbk
+
+validStack : (pkh : ℕ) →  BPredicate
+validStack pkh ⟨ time , msg₁ , stack₁ , ifStack₁ , c ⟩ = validStackAux  pkh   msg₁  stack₁

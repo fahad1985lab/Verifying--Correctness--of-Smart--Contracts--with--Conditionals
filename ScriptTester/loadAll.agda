@@ -2,10 +2,7 @@ open import basicBitcoinDataType
 
 module loadAll (param : GlobalParameters) where
 
--- Loads all files by directory in alphabetic order
--- Alphabetic order is used so that we can easily check that it is complete
--- and therefore by typechecking this file we can guarantee that the complete
--- code is type correct.
+
 
 
 open import libraries.andLib
@@ -34,10 +31,33 @@ open import stackPredicate
 ----------------------------------------
 -- Directory verificationWithIfStack --
 -----------------------------------------
+open import verificationWithIfStack.equalitiesIfThenElse param
+open import verificationWithIfStack.hoareTriple 
+open import verificationWithIfStack.hoareTripleStack2HoareTriple param
+open import verificationWithIfStack.hoareTripleStackNonActiveIfStack param
+open import verificationWithIfStack.hoareTripleStackScript param
+open import verificationWithIfStack.ifStack
+open import verificationWithIfStack.ifThenElseTheoremPart1 param
+open import verificationWithIfStack.ifThenElseTheoremPart2 param
+open import verificationWithIfStack.ifThenElseTheoremPart3 param
+open import verificationWithIfStack.ifThenElseTheoremPart4 param
+open import verificationWithIfStack.ifThenElseTheoremPart5 param
+open import verificationWithIfStack.ifThenElseTheoremPart6 param
+open import verificationWithIfStack.ifThenElseTheoremPart7 param
+open import verificationWithIfStack.ifThenElseTheoremPart8nonActive param
+open import verificationWithIfStack.ifThenElseTheoremVariant1 param
+open import verificationWithIfStack.ifThenElseTheoremVariant2 param 
+open import verificationWithIfStack.predicate
+open import verificationWithIfStack.semanticsInstructions param
+open import verificationWithIfStack.stackSemanticsInstructionsLemma param
+open import verificationWithIfStack.state
+open import verificationWithIfStack.verificationDoubleIfThenElseP2PKH param
+open import verificationWithIfStack.verificationifThenElseP2PKHPart1 param
+open import verificationWithIfStack.verificationLemmas param
+open import verificationWithIfStack.verificationP2PKH param
+open import verificationWithIfStack.verificationP2PKHindexed param
+open import verificationWithIfStack.verificationP2PKHwithIfStack param
+open import verificationWithIfStack.verificationP2PKHwithIfStackindexed param
+open import verificationWithIfStack.verificationP2PKHwithIfStackindexedPart2 param
 
-open import verificationBitcoinScripts.hoareTriple param
-open import verificationBitcoinScripts.ifStack
-open import verificationBitcoinScripts.predicate
-open import verificationBitcoinScripts.semanticsInstructions param
-open import verificationBitcoinScripts.state
 

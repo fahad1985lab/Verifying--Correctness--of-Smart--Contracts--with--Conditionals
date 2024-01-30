@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html><head><meta charset="utf-8"><title>guidelines</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><a id="1" class="Keyword">open</a> <a id="6" class="Keyword">import</a> <a id="13" href="basicBitcoinDataType.html" class="Module">basicBitcoinDataType</a>
+
+<a id="35" class="Keyword">module</a> <a id="42" href="guidelines.html" class="Module">guidelines</a> <a id="53" class="Symbol">(</a><a id="54" href="guidelines.html#54" class="Bound">param</a> <a id="60" class="Symbol">:</a> <a id="62" href="basicBitcoinDataType.html#1041" class="Record">GlobalParameters</a><a id="78" class="Symbol">)</a> <a id="80" class="Keyword">where</a>
+
+
+<a id="88" class="Comment">-- This file is guidelines for the code contained in the paper.</a>
+<a id="152" class="Comment">-- The authors:  Fahad Alhabardi, Bogdan Lazar, and Anton Setzer</a>
+<a id="217" class="Comment">-- The title of the paper: Verifying Correctness of Smart Contracts with Conditionals</a>
+
+
+<a id="305" class="Comment">-- Sect I introduction</a>
+<a id="328" class="Comment">-- Sect II related work</a>
+
+
+
+<a id="355" class="Comment">-- Sect III Introduction to the Proof Assistant to Agda</a>
+
+<a id="412" class="Keyword">open</a> <a id="417" class="Keyword">import</a> <a id="424" href="instruction.html" class="Module">instruction</a>
+<a id="436" class="Keyword">open</a> <a id="441" class="Keyword">import</a> <a id="448" href="ledger.html" class="Module">ledger</a> <a id="455" href="guidelines.html#54" class="Bound">param</a>
+
+
+<a id="463" class="Comment">-- Sect IV Operational Semantics for Bitcoin Script</a>
+
+<a id="516" class="Comment">-- Subsect A. Bitcoin Script - the language of Bitcoin for Smart Contracts</a>
+
+<a id="592" class="Comment">-- Subsect B. Operational Semantics</a>
+
+<a id="629" class="Keyword">open</a> <a id="634" class="Keyword">import</a> <a id="641" href="verificationWithIfStack.state.html" class="Module">verificationWithIfStack.state</a>
+<a id="671" class="Keyword">open</a> <a id="676" class="Keyword">import</a> <a id="683" href="verificationWithIfStack.ifStack.html" class="Module">verificationWithIfStack.ifStack</a> 
+<a id="716" class="Keyword">open</a> <a id="721" class="Keyword">import</a> <a id="728" href="verificationWithIfStack.semanticsInstructions.html" class="Module">verificationWithIfStack.semanticsInstructions</a> <a id="774" href="guidelines.html#54" class="Bound">param</a>
+
+
+
+<a id="783" class="Comment">-- Sect V Hoare Logic</a>
+
+<a id="806" class="Keyword">open</a> <a id="811" class="Keyword">import</a> <a id="818" href="verificationWithIfStack.hoareTriple.html" class="Module">verificationWithIfStack.hoareTriple</a> <a id="854" href="guidelines.html#54" class="Bound">param</a>
+
+
+<a id="862" class="Comment">-- Sect VI Verification Condition for Conditionals</a>
+
+<a id="914" class="Keyword">open</a> <a id="919" class="Keyword">import</a> <a id="926" href="verificationWithIfStack.predicate.html" class="Module">verificationWithIfStack.predicate</a>
+<a id="960" class="Keyword">open</a> <a id="965" class="Keyword">import</a> <a id="972" href="verificationWithIfStack.ifStack.html" class="Module">verificationWithIfStack.ifStack</a>
+
+<a id="1005" class="Comment">-- Main ifthenelse-theorem (theoremIfThenElse)</a>
+<a id="1052" class="Keyword">open</a> <a id="1057" class="Keyword">import</a> <a id="1064" href="verificationWithIfStack.ifThenElseTheoremPart4.html" class="Module">verificationWithIfStack.ifThenElseTheoremPart4</a> <a id="1111" href="guidelines.html#54" class="Bound">param</a>
+<a id="1117" class="Comment">-- Sect VII Conclusion and Future Work</a>
+
+
+<a id="1158" class="Comment">-- ifthenelse-non-active</a>
+<a id="1183" class="Keyword">open</a> <a id="1188" class="Keyword">import</a> <a id="1195" href="verificationWithIfStack.ifThenElseTheoremPart8nonActive.html" class="Module">verificationWithIfStack.ifThenElseTheoremPart8nonActive</a> <a id="1251" href="guidelines.html#54" class="Bound">param</a>
+
+
+
+</pre></body></html>

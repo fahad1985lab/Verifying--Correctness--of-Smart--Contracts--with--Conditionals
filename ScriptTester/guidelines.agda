@@ -25,24 +25,29 @@ open import ledger param
 
 -- Subsect B. Operational Semantics
 
-open import verificationBitcoinScripts.state
-open import verificationBitcoinScripts.semanticsInstructions param
+open import verificationWithIfStack.state
+open import verificationWithIfStack.ifStack 
+open import verificationWithIfStack.semanticsInstructions param
+
 
 
 -- Sect V Hoare Logic
 
-open import verificationBitcoinScripts.hoareTriple param
+open import verificationWithIfStack.hoareTriple param
 
 
 -- Sect VI Verification Condition for Conditionals
 
-open import verificationBitcoinScripts.predicate
-open import verificationBitcoinScripts.ifStack
+open import verificationWithIfStack.predicate
+open import verificationWithIfStack.ifStack
 
-
+-- Main ifthenelse-theorem (theoremIfThenElse)
+open import verificationWithIfStack.ifThenElseTheoremPart4 param
 -- Sect VII Conclusion and Future Work
 
 
+-- ifthenelse-non-active
+open import verificationWithIfStack.ifThenElseTheoremPart8nonActive param
 
 
 

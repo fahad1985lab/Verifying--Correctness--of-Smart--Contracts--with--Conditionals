@@ -1,6 +1,13 @@
 # Verifying Correctness of Smart Contracts with Conditionals
 
 
+## Agda and Agda standard library versions
+
+| Name                          | Version |
+| ------------------------------| ------------- |
+| Agda                          | `2.6.4.1`     |
+| Agda standard library version |  `2.0`        |
+
 ## Link of the previous project
 
 * This repository is extended from our [previous project](https://github.com/fahad1985lab/Smart--Contracts--Verification--With--Agda)

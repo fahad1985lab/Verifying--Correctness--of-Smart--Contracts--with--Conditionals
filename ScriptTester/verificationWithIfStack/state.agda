@@ -1,8 +1,8 @@
-module verificationBitcoinScripts.state where
+module verificationWithIfStack.state where
 
 open import Data.Nat  hiding (_≤_)
 open import Data.List hiding (_++_)
-open import Data.Unit  hiding (_≤_)
+open import Data.Unit  
 open import Data.Empty
 open import Data.Maybe
 open import Data.Bool  hiding (_≤_ ; if_then_else_ ) renaming (_∧_ to _∧b_ ; _∨_ to _∨b_ ; T to True)
@@ -17,11 +17,18 @@ open ≡-Reasoning
 open import Agda.Builtin.Equality
 
 
+open import libraries.listLib
+open import libraries.natLib
+open import libraries.boolLib
+open import libraries.andLib
+--open import libraries.miscLib
+open import libraries.maybeLib
+
 
 open import basicBitcoinDataType
 open import stack
 
-open import verificationBitcoinScripts.ifStack
+open import verificationWithIfStack.ifStack
 
 
 
@@ -35,7 +42,6 @@ record State  : Set  where
          stack : Stack
          ifStack : IfStack
          consis  : IfStackConsis ifStack
-
 open State public
 
 
@@ -57,11 +63,27 @@ state1WithMaybe ⟨ currentTime₁ , msg₁ , nothing , ifStack₁ , consis₁ �
 
 
 
+
+
+
+
+
+
 mutual
 
 
   liftStackToStateTransformerAux' : Maybe Stack → State → StateWithMaybe
   liftStackToStateTransformerAux' maybest ⟨ currentTime₁ , msg₁ , stack₁ , ifStack₁ , consis₁ ⟩ = ⟨ currentTime₁ , msg₁ , maybest , ifStack₁ , consis₁ ⟩
+
+
+
+exeTransformerDepIfStack : ( State → Maybe State ) →  State → Maybe State
+exeTransformerDepIfStack f  st@( ⟨ time , msg₁ , stack₁ , [] , c ⟩ )  =  f st
+exeTransformerDepIfStack f  st@( ⟨ time , msg₁ , stack₁ , ifCase ∷ ifStack₁ , c ⟩) =  f st
+exeTransformerDepIfStack f  st@( ⟨ time , msg₁ , stack₁ , elseCase ∷ ifStack₁ , c ⟩) =  f st
+exeTransformerDepIfStack f  st@( ⟨ time , msg₁ , stack₁ , elseSkip ∷ ifStack₁ , c ⟩ ) = just st
+exeTransformerDepIfStack f  st@( ⟨ time , msg₁ , stack₁ , ifIgnore ∷ ifStack₁ , c ⟩ ) = just st
+exeTransformerDepIfStack f  st@( ⟨ time , msg₁ , stack₁ , ifSkip ∷ ifStack₁ , c ⟩) = just st
 
 
 exeTransformerDepIfStack' : ( State → StateWithMaybe ) →  State → Maybe State
@@ -81,10 +103,25 @@ liftStackToStateTransformerDepIfStack' : (Stack → Maybe Stack)  → State → 
 liftStackToStateTransformerDepIfStack' f = stackTransform2StateTransform (λ time msg → f)
 
 
+
 liftTimeStackToStateTransformerDepIfStack' : (Time → Stack → Maybe Stack)  → State → Maybe State
 liftTimeStackToStateTransformerDepIfStack' f = stackTransform2StateTransform (λ time msg → f time)
 
-
 liftMsgStackToStateTransformerDepIfStack' : (Msg → Stack → Maybe Stack)  → State → Maybe State
 liftMsgStackToStateTransformerDepIfStack' f  = stackTransform2StateTransform (λ time → f)
+
+
+--MsgToMStackToIfStackToMState
+msgToMStackToIfStackToMState : Time → Msg  → Maybe Stack → (ifs : IfStack) → IfStackConsis ifs → Maybe State
+msgToMStackToIfStackToMState time  m nothing ifs c = nothing
+msgToMStackToIfStackToMState time  m (just x) ifs c = just ⟨  time , m , x , ifs , c ⟩
+
+-- it assumes  the IfStack has been checked and lifts from message to the state
+liftFromMsgToStateAssumeIfStack : ( Msg → Stack → Maybe Stack) → State → Maybe State
+liftFromMsgToStateAssumeIfStack f ⟨ time , msg₁ , stack₁ , ifStack₁ , c ⟩ = msgToMStackToIfStackToMState  time msg₁ (  f  msg₁  stack₁) ifStack₁ c
+
+liftToStateAssumeIfStack : (  Stack → Maybe Stack) → State → Maybe State
+liftToStateAssumeIfStack f ⟨ time , msg₁ , stack₁ , ifStack₁ , c ⟩ = msgToMStackToIfStackToMState  time msg₁ (  f    stack₁) ifStack₁ c
+
+
 
