@@ -49,7 +49,7 @@ open import verificationWithIfStack.verificationP2PKHindexed param
 open import verificationWithIfStack.verificationP2PKHwithIfStack param
 open import verificationWithIfStack.verificationP2PKHwithIfStackindexed param
 
--- Before 12/9/21 was additionAnton1.agda
+
 
 
 
